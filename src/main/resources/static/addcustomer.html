@@ -1,0 +1,30 @@
+Name<input type = "text" id = "name"><br>
+Orderid<input type = "text" id = "orderid"><br>
+<button onclick = "save()">Save customer to database</button>
+
+<script>
+function save(){
+    var customer = {};
+    customer.name = document.getElementById("name").value;
+    customer.orderid = document.getElementById("orderid").value;
+    console.log(customer);
+
+    //posting customer json to RESTful API
+    //you should have json ready
+   fetch('customer', {
+      method: 'post',
+      headers: {
+         'Accept': 'application/json, text/plain, */*',
+         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(customer)
+   })
+   .then(res=>res.json())
+   .then(res => console.log(res))
+
+   .catch(function(error){
+       console.log(error);
+   });
+}
+   
+</script>
